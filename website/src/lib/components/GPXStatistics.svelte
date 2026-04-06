@@ -33,7 +33,7 @@
 <Card.Root
     class="h-full {orientation === 'vertical'
         ? 'min-w-40 sm:min-w-44'
-        : 'w-full h-fit my-1'} border-none shadow-none p-0 text-sm sm:text-base bg-transparent"
+        : 'w-full h-fit my-1'} ring-0 p-0 text-sm sm:text-base bg-transparent"
 >
     <Card.Content class="h-full p-0">
         <div

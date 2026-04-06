@@ -232,120 +232,127 @@
 
 <div class="flex flex-col">
     {#if $customBasemapOrder.length > 0}
-        <div class="flex flex-row items-center gap-1 font-semibold mb-2">
-            <Map size="16" />
-            {i18n._('layers.label.basemaps')}
-            <div class="grow">
-                <Separator />
+        <div class="px-3 py-2">
+            <div class="flex flex-row items-center gap-1 font-semibold mb-2">
+                <Map size="16" />
+                {i18n._('layers.label.basemaps')}
+            </div>
+            <div
+                class="ml-1.5 flex flex-col gap-1"
+                use:dndzone={{
+                    items: customBasemapItems,
+                    type: 'basemap',
+                    dropTargetStyle: {},
+                    transformDraggedElement: (element) => {
+                        if (element) {
+                            element.style.opacity = '0.5';
+                        }
+                    },
+                }}
+                onconsider={(e) => {
+                    customBasemapItems = e.detail.items;
+                }}
+                onfinalize={(e) => {
+                    customBasemapItems = e.detail.items;
+                    $customBasemapOrder = customBasemapItems.map((item) => item.id);
+                    $selectedBasemapTree.basemaps['custom'] = customBasemapItems.reduce(
+                        (acc, item) => {
+                            acc[item.id] = true;
+                            return acc;
+                        },
+                        {}
+                    );
+                }}
+            >
+                {#each customBasemapItems as item (item.id)}
+                    <div class="flex flex-row items-center gap-1">
+                        <Move size="12" />
+                        <span class="grow">{item.name}</span>
+                        <Button
+                            variant="outline"
+                            size="icon-sm"
+                            onclick={() => (selectedLayerId = item.id)}
+                            class="p-1 h-7"
+                        >
+                            <Pencil size="16" />
+                        </Button>
+                        <Button
+                            variant="outline"
+                            size="icon-sm"
+                            onclick={() => deleteLayer(item.id)}
+                            class="p-1 h-7"
+                        >
+                            <Trash2 size="16" />
+                        </Button>
+                    </div>
+                {/each}
             </div>
         </div>
+        <Separator />
     {/if}
-    <div
-        class="ml-1.5 flex flex-col gap-1 {$customBasemapOrder.length > 0 ? 'mb-2' : ''}"
-        use:dndzone={{
-            items: customBasemapItems,
-            type: 'basemap',
-            dropTargetStyle: {},
-            transformDraggedElement: (element) => {
-                if (element) {
-                    element.style.opacity = '0.5';
-                }
-            },
-        }}
-        onconsider={(e) => {
-            customBasemapItems = e.detail.items;
-        }}
-        onfinalize={(e) => {
-            customBasemapItems = e.detail.items;
-            $customBasemapOrder = customBasemapItems.map((item) => item.id);
-            $selectedBasemapTree.basemaps['custom'] = customBasemapItems.reduce((acc, item) => {
-                acc[item.id] = true;
-                return acc;
-            }, {});
-        }}
-    >
-        {#each customBasemapItems as item (item.id)}
-            <div class="flex flex-row items-center gap-2">
-                <Move size="12" />
-                <span class="grow">{item.name}</span>
-                <Button
-                    variant="outline"
-                    size="icon-sm"
-                    onclick={() => (selectedLayerId = item.id)}
-                    class="p-1 h-7"
-                >
-                    <Pencil size="16" />
-                </Button>
-                <Button
-                    variant="outline"
-                    size="icon-sm"
-                    onclick={() => deleteLayer(item.id)}
-                    class="p-1 h-7"
-                >
-                    <Trash2 size="16" />
-                </Button>
-            </div>
-        {/each}
-    </div>
     {#if $customOverlayOrder.length > 0}
-        <div class="flex flex-row items-center gap-1 font-semibold mb-2">
-            <Layers2 size="16" />
-            {i18n._('layers.label.overlays')}
-            <div class="grow">
-                <Separator />
+        <div class="px-3 py-2">
+            <div class="flex flex-row items-center gap-1 font-semibold mb-2">
+                <Layers2 size="16" />
+                {i18n._('layers.label.overlays')}
+                <div class="grow"></div>
+            </div>
+            <div
+                class="ml-1.5 flex flex-col gap-1"
+                use:dndzone={{
+                    items: customOverlayItems,
+                    type: 'overlay',
+                    dropTargetStyle: {},
+                    transformDraggedElement: (element) => {
+                        if (element) {
+                            element.style.opacity = '0.5';
+                        }
+                    },
+                }}
+                onconsider={(e) => {
+                    customOverlayItems = e.detail.items;
+                }}
+                onfinalize={(e) => {
+                    customOverlayItems = e.detail.items;
+                    $customOverlayOrder = customOverlayItems.map((item) => item.id);
+                    $selectedOverlayTree.overlays['custom'] = customOverlayItems.reduce(
+                        (acc, item) => {
+                            acc[item.id] = true;
+                            return acc;
+                        },
+                        {}
+                    );
+                }}
+            >
+                {#each customOverlayItems as item (item.id)}
+                    <div class="flex flex-row items-center gap-1">
+                        <Move size="12" />
+                        <span class="grow">{item.name}</span>
+                        <Button
+                            variant="outline"
+                            size="icon-sm"
+                            onclick={() => (selectedLayerId = item.id)}
+                            class="p-1 h-7"
+                        >
+                            <Pencil size="16" />
+                        </Button>
+                        <Button
+                            variant="outline"
+                            size="icon-sm"
+                            onclick={() => deleteLayer(item.id)}
+                            class="p-1 h-7"
+                        >
+                            <Trash2 size="16" />
+                        </Button>
+                    </div>
+                {/each}
             </div>
         </div>
+        <Separator />
     {/if}
-    <div
-        class="ml-1.5 flex flex-col gap-1 {$customOverlayOrder.length > 0 ? 'mb-2' : ''}"
-        use:dndzone={{
-            items: customOverlayItems,
-            type: 'overlay',
-            dropTargetStyle: {},
-            transformDraggedElement: (element) => {
-                if (element) {
-                    element.style.opacity = '0.5';
-                }
-            },
-        }}
-        onconsider={(e) => {
-            customOverlayItems = e.detail.items;
-        }}
-        onfinalize={(e) => {
-            customOverlayItems = e.detail.items;
-            $customOverlayOrder = customOverlayItems.map((item) => item.id);
-            $selectedOverlayTree.overlays['custom'] = customOverlayItems.reduce((acc, item) => {
-                acc[item.id] = true;
-                return acc;
-            }, {});
-        }}
-    >
-        {#each customOverlayItems as item (item.id)}
-            <div class="flex flex-row items-center gap-2">
-                <Move size="12" />
-                <span class="grow">{item.name}</span>
-                <Button
-                    variant="outline"
-                    size="icon-sm"
-                    onclick={() => (selectedLayerId = item.id)}
-                    class="p-1 h-7"
-                >
-                    <Pencil size="16" />
-                </Button>
-                <Button
-                    variant="outline"
-                    size="icon-sm"
-                    onclick={() => deleteLayer(item.id)}
-                    class="p-1 h-7"
-                >
-                    <Trash2 size="16" />
-                </Button>
-            </div>
-        {/each}
-    </div>
-    <Card.Root class="py-0 gap-0 shadow-none">
+    <Card.Root class="py-0 gap-0 shadow-none ring-0">
         <Card.Header class="p-3">
-            <Card.Title class="text-base">
+            <Card.Title class="text-sm font-semibold">
                 {#if selectedLayerId}
                     {i18n._('layers.custom_layers.edit')}
                 {:else}
@@ -353,7 +360,7 @@
                 {/if}
             </Card.Title>
         </Card.Header>
-        <Card.Content class="p-3 pt-0">
+        <Card.Content class="px-3 py-2">
             <fieldset class="flex flex-col gap-2">
                 <Label for="name">{i18n._('menu.metadata.name')}</Label>
                 <Input bind:value={name} id="name" class="h-8" />
@@ -410,7 +417,7 @@
                     </div>
                 </RadioGroup.Root>
                 {#if selectedLayerId}
-                    <div class="mt-2 flex flex-row gap-2">
+                    <div class="mt-2 flex flex-row gap-1">
                         <Button variant="outline" onclick={createLayer} class="grow">
                             <Save size="16" />
                             {i18n._('layers.custom_layers.update')}

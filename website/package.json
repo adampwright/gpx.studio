@@ -14,6 +14,7 @@
         "format": "prettier --write . --config ../.prettierrc --ignore-path ../.prettierignore --ignore-path ./.gitignore"
     },
     "devDependencies": {
+        "@internationalized/date": "^3.12.0",
         "@lucide/svelte": "^0.544.0",
         "@sveltejs/adapter-static": "^3.0.8",
         "@sveltejs/enhanced-img": "^0.6.0",
@@ -30,7 +31,7 @@
         "@types/sortablejs": "^1.15.8",
         "@typescript-eslint/eslint-plugin": "^8.33.1",
         "@typescript-eslint/parser": "^8.33.1",
-        "bits-ui": "^2.14.4",
+        "bits-ui": "^2.17.2",
         "eslint": "^9.28.0",
         "eslint-config-prettier": "^10.1.5",
         "eslint-plugin-svelte": "^3.9.1",
@@ -59,7 +60,6 @@
     "type": "module",
     "dependencies": {
         "@docsearch/js": "^3.9.0",
-        "@internationalized/date": "^3.8.2",
         "@mapbox/sphericalmercator": "^2.0.1",
         "@mapbox/tilebelt": "^2.0.2",
         "@maplibre/maplibre-gl-geocoder": "^1.9.4",

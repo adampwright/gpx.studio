@@ -35,7 +35,7 @@
             <Button
                 variant="ghost"
                 size="icon"
-                class="w-full flex flex-row gap-1 {side === 'right'
+                class="w-full flex flex-row gap-1 border-none {side === 'right'
                     ? 'justify-between'
                     : 'justify-start pl-1'} h-fit {nohover
                     ? 'hover:bg-background'
@@ -62,7 +62,7 @@
         <Button
             variant="ghost"
             size="icon"
-            class="w-full flex flex-row gap-1 {side === 'right'
+            class="w-full flex flex-row gap-1 border-none {side === 'right'
                 ? 'justify-between'
                 : 'justify-start pl-1'} h-fit {nohover ? 'hover:bg-background' : ''}"
         >

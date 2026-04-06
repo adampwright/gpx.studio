@@ -16,7 +16,6 @@
 </script>
 
 <Button
-    size="sm"
     class="justify-start {className}"
     variant="outline"
     onclick={() => {

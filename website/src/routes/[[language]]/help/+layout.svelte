@@ -28,7 +28,7 @@
                 <Button
                     variant="link"
                     href={getURLForLanguage(i18n.lang, `/help/${guide}`)}
-                    class="min-h-5 h-fit p-0 w-fit text-muted-foreground hover:text-foreground hover:no-underline font-normal hover:font-semibold items-start whitespace-normal {page
+                    class="min-h-5 h-fit p-0 w-fit border-none text-muted-foreground hover:text-foreground hover:no-underline font-normal hover:font-semibold items-start whitespace-normal {page
                         .params.guide === guide
                         ? 'font-semibold text-foreground'
                         : ''}"
@@ -39,7 +39,7 @@
                     <Button
                         variant="link"
                         href={getURLForLanguage(i18n.lang, `/help/${guide}/${subGuide}`)}
-                        class="min-h-5 h-fit p-0 w-fit text-muted-foreground hover:text-foreground hover:no-underline font-normal hover:font-semibold items-start whitespace-normal ml-3 {page
+                        class="min-h-5 h-fit p-0 w-fit border-none text-muted-foreground hover:text-foreground hover:no-underline font-normal hover:font-semibold items-start whitespace-normal ml-3 {page
                             .params.guide ===
                         guide + '/' + subGuide
                             ? 'font-semibold text-foreground'

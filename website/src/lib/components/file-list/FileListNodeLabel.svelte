@@ -114,10 +114,10 @@
     <ContextMenu.Trigger class="grow truncate">
         <Button
             variant="ghost"
-            class="relative w-full p-0 overflow-hidden focus-visible:ring-0 focus-visible:ring-offset-0 {orientation ===
+            class="relative w-full p-0 overflow-hidden border-none focus-visible:ring-0 focus-visible:ring-offset-0 flex flex-row {orientation ===
             'vertical'
-                ? 'h-fit'
-                : 'h-9 px-1.5 shadow-md'} pointer-events-auto"
+                ? 'h-7'
+                : 'h-9 px-1.5'} pointer-events-auto"
         >
             {#if item instanceof ListFileItem || item instanceof ListTrackItem}
                 <MetadataDialog bind:open={openEditMetadata} {node} {item} />
@@ -126,7 +126,7 @@
             {#if item.level === ListLevel.FILE || item.level === ListLevel.TRACK}
                 <div
                     class="absolute {orientation === 'vertical'
-                        ? 'top-0 bottom-0 right-1 w-1'
+                        ? 'top-0 bottom-0 right-0 w-1'
                         : 'top-0 h-1 left-0 right-0'}"
                     style="background:linear-gradient(to {orientation === 'vertical'
                         ? 'bottom'
@@ -139,7 +139,7 @@
                 ></div>
             {/if}
             <span
-                class="w-full text-left truncate py-1 flex flex-row items-center {hidden
+                class="grow text-left truncate ml-1 flex flex-row items-center {hidden
                     ? 'text-muted-foreground'
                     : ''} {$cut && $copied?.some((i) => i.getFullId() === item.getFullId())
                     ? 'text-muted-foreground'

@@ -22,9 +22,9 @@
         onchange?: (date: DateValue | undefined) => void;
     } = $props();
 
-    const df = new DateFormatter(locale, {
+    const df = $derived(new DateFormatter(locale, {
         dateStyle: 'long',
-    });
+    }));
 
     let contentRef = $state<HTMLElement | null>(null);
 </script>

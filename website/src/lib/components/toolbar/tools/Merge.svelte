@@ -76,7 +76,7 @@
     {/if}
     <Button
         variant="outline"
-        class="whitespace-normal h-fit"
+        class="whitespace-normal h-fit min-h-8 py-1"
         disabled={(mergeType === MergeType.TRACES && !canMergeTraces) ||
             (mergeType === MergeType.CONTENTS && !canMergeContents)}
         onclick={() => {

@@ -121,7 +121,7 @@
                 <Accordion.Root class="flex flex-col" bind:value={accordionValue} type="single">
                     <Accordion.Item value="layer-selection" class="flex flex-col">
                         <Accordion.Trigger>{i18n._('layers.selection')}</Accordion.Trigger>
-                        <Accordion.Content class="grow flex flex-col border rounded">
+                        <Accordion.Content class="grow flex flex-col border rounded-md mb-1.5">
                             <div class="py-2 pl-3 pr-2">
                                 <LayerTree
                                     layerTree={basemapTree}
@@ -152,7 +152,9 @@
                     </Accordion.Item>
                     <Accordion.Item value="overlay-opacity">
                         <Accordion.Trigger>{i18n._('layers.opacity')}</Accordion.Trigger>
-                        <Accordion.Content class="flex flex-col gap-3 overflow-visible">
+                        <Accordion.Content
+                            class="flex flex-col gap-3 overflow-visible border rounded-md px-3 py-2 mb-1.5"
+                        >
                             <div class="flex flex-row gap-6 items-center">
                                 <Label>
                                     {i18n._('layers.custom_layers.overlay')}
@@ -231,10 +233,10 @@
                     <Accordion.Item value="custom-layers">
                         <Accordion.Trigger>{i18n._('layers.custom_layers.title')}</Accordion.Trigger
                         >
-                        <Accordion.Content>
-                            <ScrollArea>
-                                <CustomLayers />
-                            </ScrollArea>
+                        <Accordion.Content
+                            class="flex flex-col overflow-visible border rounded-md p-0 mb-1.5"
+                        >
+                            <CustomLayers />
                         </Accordion.Content>
                     </Accordion.Item>
                     <Accordion.Item value="terrain-source">

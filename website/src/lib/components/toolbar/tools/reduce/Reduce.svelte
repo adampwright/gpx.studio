@@ -14,7 +14,7 @@
 
     let props: { class?: string } = $props();
 
-    let sliderValue = $state([50]);
+    let sliderValue = $state(50);
     const maxTolerance = 10000;
 
     let validSelection = $derived(
@@ -25,7 +25,7 @@
 
     $effect(() => {
         tolerance.set(
-            minTolerance * 2 ** (sliderValue[0] / (100 / Math.log2(maxTolerance / minTolerance)))
+            minTolerance * 2 ** (sliderValue / (100 / Math.log2(maxTolerance / minTolerance)))
         );
     });
 
@@ -36,7 +36,7 @@
 
 <div class="flex flex-col gap-3 w-full max-w-80 {props.class ?? ''}">
     <div class="p-2">
-        <Slider bind:value={sliderValue} min={0} max={100} step={1} type="multiple" />
+        <Slider bind:value={sliderValue} min={0} max={100} step={1} type="single" />
     </div>
     <Label class="flex flex-row justify-between">
         <span>{i18n._('toolbar.reduce.tolerance')}</span>

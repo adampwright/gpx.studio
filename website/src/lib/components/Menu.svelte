@@ -389,7 +389,7 @@
                 <Menubar.Content class="border-none">
                     <Menubar.Sub>
                         <Menubar.SubTrigger>
-                            <Ruler size="16" class="mr-2" />{i18n._('menu.distance_units')}
+                            <Ruler size="16" />{i18n._('menu.distance_units')}
                         </Menubar.SubTrigger>
                         <Menubar.SubContent>
                             <Menubar.RadioGroup bind:value={$distanceUnits}>
@@ -407,7 +407,7 @@
                     </Menubar.Sub>
                     <Menubar.Sub>
                         <Menubar.SubTrigger>
-                            <Zap size="16" class="mr-2" />{i18n._('menu.velocity_units')}
+                            <Zap size="16" />{i18n._('menu.velocity_units')}
                         </Menubar.SubTrigger>
                         <Menubar.SubContent>
                             <Menubar.RadioGroup bind:value={$velocityUnits}>
@@ -422,7 +422,7 @@
                     </Menubar.Sub>
                     <Menubar.Sub>
                         <Menubar.SubTrigger>
-                            <Thermometer size="16" class="mr-2" />{i18n._('menu.temperature_units')}
+                            <Thermometer size="16" />{i18n._('menu.temperature_units')}
                         </Menubar.SubTrigger>
                         <Menubar.SubContent>
                             <Menubar.RadioGroup bind:value={$temperatureUnits}>
@@ -438,7 +438,7 @@
                     <Menubar.Separator />
                     <Menubar.Sub>
                         <Menubar.SubTrigger>
-                            <Languages size="16" class="mr-2" />
+                            <Languages size="16" />
                             {i18n._('menu.language')}
                         </Menubar.SubTrigger>
                         <Menubar.SubContent>
@@ -454,9 +454,9 @@
                     <Menubar.Sub>
                         <Menubar.SubTrigger>
                             {#if mode.current === 'light' || !mode.current}
-                                <Sun size="16" class="mr-2" />
+                                <Sun size="16" />
                             {:else}
-                                <Moon size="16" class="mr-2" />
+                                <Moon size="16" />
                             {/if}
                             {i18n._('menu.mode')}
                         </Menubar.SubTrigger>
@@ -479,7 +479,7 @@
                     <Menubar.Separator />
                     <Menubar.Sub>
                         <Menubar.SubTrigger>
-                            <PersonStanding size="16" class="mr-2" />
+                            <PersonStanding size="16" />
                             {i18n._('menu.street_view_source')}
                         </Menubar.SubTrigger>
                         <Menubar.SubContent>
@@ -500,12 +500,12 @@
                 </Menubar.Content>
             </Menubar.Menu>
         </Menubar.Root>
-        <div class="h-fit flex flex-row items-center ml-1 gap-1">
+        <div class="h-fit flex flex-row items-center">
             <Button
                 variant="ghost"
                 href="./help"
                 target="_blank"
-                class="cursor-default h-fit rounded-sm px-3 py-0.5"
+                class="cursor-default h-fit rounded-md px-3 py-0.5"
                 aria-label={i18n._('menu.help')}
             >
                 <BookOpenText size="18" class="md:hidden" />
@@ -517,7 +517,7 @@
                 variant="ghost"
                 href="https://opencollective.com/gpxstudio"
                 target="_blank"
-                class="cursor-default h-fit rounded-sm font-bold text-support hover:text-support px-3 py-0.5"
+                class="cursor-default h-fit rounded-md font-bold text-support hover:text-support px-3 py-0.5"
                 aria-label={i18n._('menu.donate')}
             >
                 <HeartHandshake size="18" class="md:hidden" />

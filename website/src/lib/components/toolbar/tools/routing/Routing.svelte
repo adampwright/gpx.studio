@@ -191,7 +191,7 @@
             <ButtonWithTooltip
                 label={i18n._('toolbar.routing.reverse.tooltip')}
                 variant="outline"
-                class="gap-1 text-xs"
+                class="gap-1 text-xs px-1.5 py-1.5 h-fit"
                 disabled={!validSelection}
                 onclick={fileActions.reverseSelection}
             >
@@ -200,7 +200,7 @@
             <ButtonWithTooltip
                 label={i18n._('toolbar.routing.route_back_to_start.tooltip')}
                 variant="outline"
-                class="gap-1 text-xs"
+                class="gap-1 text-xs px-1.5 py-1.5 h-fit"
                 disabled={!validSelection}
                 onclick={() => {
                     const selected = selection.getOrderedSelection();
@@ -236,14 +236,14 @@
             <ButtonWithTooltip
                 label={i18n._('toolbar.routing.round_trip.tooltip')}
                 variant="outline"
-                class="gap-1 text-xs"
+                class="gap-1 text-xs px-1.5 py-1.5 h-fit"
                 disabled={!validSelection}
                 onclick={fileActions.createRoundTripForSelection}
             >
                 <Repeat class="size-3" />{i18n._('toolbar.routing.round_trip.button')}
             </ButtonWithTooltip>
         </div>
-        <div class="w-full flex flex-row gap-2 items-end justify-between">
+        <div class="w-full flex flex-row gap-1 items-end justify-between">
             <Help link={getURLForLanguage(i18n.lang, '/help/toolbar/routing')}>
                 {#if !validSelection}
                     {i18n._('toolbar.routing.help_no_file')}

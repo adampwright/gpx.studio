@@ -81,20 +81,18 @@
                     </ButtonWithTooltip>
                 </Popover.Trigger>
                 <Popover.Content
-                    class="w-fit p-0 flex flex-col"
+                    class="w-fit p-0 flex flex-col gap-0 overflow-hidden"
                     side="top"
                     align="end"
                     sideOffset={-32}
                 >
                     <ToggleGroup.Root
-                        class="flex flex-col items-start gap-0 p-1 w-full border-none"
+                        class="flex flex-col w-full border-none"
                         type="single"
+                        size="sm"
                         bind:value={$elevationFill}
                     >
-                        <ToggleGroup.Item
-                            class="p-0 pr-1.5 h-6 w-full gap-1.5 rounded flex justify-start data-[state=on]:bg-background data-[state=on]:hover:bg-accent hover:bg-accent hover:text-foreground"
-                            value="slope"
-                        >
+                        <ToggleGroup.Item value="slope" class="w-full flex flex-row justify-start">
                             <div class="w-6 flex justify-center items-center">
                                 {#if $elevationFill === 'slope'}
                                     <Circle class="size-1.5 fill-current text-current" />
@@ -104,9 +102,8 @@
                             {i18n._('quantities.slope')}
                         </ToggleGroup.Item>
                         <ToggleGroup.Item
-                            class="p-0 pr-1.5 h-6 w-full gap-1.5 rounded flex justify-start data-[state=on]:bg-background data-[state=on]:hover:bg-accent hover:bg-accent hover:text-foreground"
                             value="surface"
-                            variant="outline"
+                            class="w-full flex flex-row justify-start"
                         >
                             <div class="w-6 flex justify-center items-center">
                                 {#if $elevationFill === 'surface'}
@@ -117,9 +114,8 @@
                             {i18n._('quantities.surface')}
                         </ToggleGroup.Item>
                         <ToggleGroup.Item
-                            class="p-0 pr-1.5 h-6 w-full gap-1.5 rounded flex justify-start data-[state=on]:bg-background data-[state=on]:hover:bg-accent hover:bg-accent hover:text-foreground"
                             value="highway"
-                            variant="outline"
+                            class="w-full flex flex-row justify-start"
                         >
                             <div class="w-6 flex justify-center items-center">
                                 {#if $elevationFill === 'highway'}
@@ -132,14 +128,12 @@
                     </ToggleGroup.Root>
                     <Separator />
                     <ToggleGroup.Root
-                        class="flex flex-col items-start gap-0 p-1"
+                        class="flex flex-col gap-0"
                         type="multiple"
+                        size="sm"
                         bind:value={$additionalDatasets}
                     >
-                        <ToggleGroup.Item
-                            class="p-0 pr-1.5 h-6 w-full gap-1.5 rounded flex justify-start data-[state=on]:bg-background data-[state=on]:hover:bg-accent hover:bg-accent hover:text-foreground"
-                            value="speed"
-                        >
+                        <ToggleGroup.Item value="speed" class="w-full flex flex-row justify-start">
                             <div class="w-6 flex justify-center items-center">
                                 {#if $additionalDatasets.includes('speed')}
                                     <Check size="14" />
@@ -150,10 +144,7 @@
                                 ? i18n._('quantities.speed')
                                 : i18n._('quantities.pace')}
                         </ToggleGroup.Item>
-                        <ToggleGroup.Item
-                            class="p-0 pr-1.5 h-6 w-full gap-1.5 rounded flex justify-start data-[state=on]:bg-background data-[state=on]:hover:bg-accent hover:bg-accent hover:text-foreground"
-                            value="hr"
-                        >
+                        <ToggleGroup.Item value="hr" class="w-full flex flex-row justify-start">
                             <div class="w-6 flex justify-center items-center">
                                 {#if $additionalDatasets.includes('hr')}
                                     <Check size="14" />
@@ -162,10 +153,7 @@
                             <HeartPulse size="15" />
                             {i18n._('quantities.heartrate')}
                         </ToggleGroup.Item>
-                        <ToggleGroup.Item
-                            class="p-0 pr-1.5 h-6 w-full gap-1.5 rounded flex justify-start data-[state=on]:bg-background data-[state=on]:hover:bg-accent hover:bg-accent hover:text-foreground"
-                            value="cad"
-                        >
+                        <ToggleGroup.Item value="cad" class="w-full flex flex-row justify-start">
                             <div class="w-6 flex justify-center items-center">
                                 {#if $additionalDatasets.includes('cad')}
                                     <Check size="14" />
@@ -174,10 +162,7 @@
                             <Orbit size="15" />
                             {i18n._('quantities.cadence')}
                         </ToggleGroup.Item>
-                        <ToggleGroup.Item
-                            class="p-0 pr-1.5 h-6 w-full gap-1.5 rounded flex justify-start data-[state=on]:bg-background data-[state=on]:hover:bg-accent hover:bg-accent hover:text-foreground"
-                            value="atemp"
-                        >
+                        <ToggleGroup.Item value="atemp" class="w-full flex flex-row justify-start">
                             <div class="w-6 flex justify-center items-center">
                                 {#if $additionalDatasets.includes('atemp')}
                                     <Check size="14" />
@@ -186,10 +171,7 @@
                             <Thermometer size="15" />
                             {i18n._('quantities.temperature')}
                         </ToggleGroup.Item>
-                        <ToggleGroup.Item
-                            class="p-0 pr-1.5 h-6 w-full gap-1.5 rounded flex justify-start data-[state=on]:bg-background data-[state=on]:hover:bg-accent hover:bg-accent hover:text-foreground"
-                            value="power"
-                        >
+                        <ToggleGroup.Item value="power" class="w-full flex flex-row justify-start">
                             <div class="w-6 flex justify-center items-center">
                                 {#if $additionalDatasets.includes('power')}
                                     <Check size="14" />

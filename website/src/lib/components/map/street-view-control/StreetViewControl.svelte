@@ -53,7 +53,7 @@
 <CustomControl class="w-[29px] h-[29px] shrink-0">
     <ButtonWithTooltip
         variant="ghost"
-        class="w-full h-full"
+        class="w-full h-full border-none rounded-sm"
         side="left"
         label={i18n._('menu.toggle_street_view')}
         onclick={() => {

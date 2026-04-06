@@ -17,7 +17,7 @@
 <div class="flex flex-col gap-3 w-full max-w-80 {props.class ?? ''}">
     <Button
         variant="outline"
-        class="whitespace-normal h-fit"
+        class="whitespace-normal h-fit min-h-8 py-1"
         disabled={!validSelection}
         onclick={() => fileActions.addElevationToSelection()}
     >

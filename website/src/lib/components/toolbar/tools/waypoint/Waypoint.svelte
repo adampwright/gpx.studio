@@ -161,66 +161,73 @@
 </script>
 
 <div class="flex flex-col gap-3 w-full max-w-96 {props.class ?? ''}">
-    <fieldset class="flex flex-col gap-2">
-        <Label for="name">{i18n._('menu.metadata.name')}</Label>
-        <Input
-            bind:value={name}
-            id="name"
-            class="font-semibold h-8"
-            disabled={!canCreate && !$selectedWaypoint}
-        />
-        <Label for="description">{i18n._('menu.metadata.description')}</Label>
-        <Textarea
-            bind:value={description}
-            id="description"
-            disabled={!canCreate && !$selectedWaypoint}
-            class="min-h-8 h-8 py-1 px-3 text-sm"
-        />
-        <Label for="symbol">{i18n._('toolbar.waypoint.icon')}</Label>
-        <Select.Root bind:value={sym} type="single">
-            <Select.Trigger
-                id="symbol"
-                size="sm"
-                class="w-full"
+    <fieldset class="flex flex-col gap-1.5">
+        <div class="flex flex-col gap-1">
+            <Label for="name">{i18n._('menu.metadata.name')}</Label>
+            <Input
+                bind:value={name}
+                id="name"
+                class="font-semibold"
                 disabled={!canCreate && !$selectedWaypoint}
-            >
-                <span class="flex flex-row gap-1.5 items-center">
-                    {#if symbolKey}
-                        {#if symbols[symbolKey].icon}
-                            {@const Component = symbols[symbolKey].icon}
-                            <Component size="14" />
-                        {/if}
-                        {i18n._(`gpx.symbol.${symbolKey}`)}
-                    {:else}
-                        {sym}
-                    {/if}
-                </span>
-            </Select.Trigger>
-            <Select.Content class="max-h-60 overflow-y-scroll">
-                {#each sortedSymbols as [key, symbol]}
-                    <Select.Item value={symbol.value}>
-                        <span>
-                            {#if symbol.icon}
-                                {@const Component = symbol.icon}
-                                <Component size="14" class="inline-block align-sub" />
-                            {:else}
-                                <span class="w-4 inline-block"></span>
+            />
+        </div>
+        <div class="flex flex-col gap-1">
+            <Label for="description">{i18n._('menu.metadata.description')}</Label>
+            <Textarea
+                bind:value={description}
+                id="description"
+                disabled={!canCreate && !$selectedWaypoint}
+                class="min-h-8 h-8 py-1 px-3 text-sm"
+            />
+        </div>
+        <div class="flex flex-col gap-1">
+            <Label for="symbol">{i18n._('toolbar.waypoint.icon')}</Label>
+            <Select.Root bind:value={sym} type="single">
+                <Select.Trigger
+                    id="symbol"
+                    class="w-full"
+                    disabled={!canCreate && !$selectedWaypoint}
+                >
+                    <span class="flex flex-row gap-1.5 items-center">
+                        {#if symbolKey}
+                            {#if symbols[symbolKey].icon}
+                                {@const Component = symbols[symbolKey].icon}
+                                <Component size="14" />
                             {/if}
-                            {i18n._(`gpx.symbol.${key}`)}
-                        </span>
-                    </Select.Item>
-                {/each}
-            </Select.Content>
-        </Select.Root>
-        <Label for="link">{i18n._('toolbar.waypoint.link')}</Label>
-        <Input
-            bind:value={link}
-            id="link"
-            class="h-8"
-            disabled={!canCreate && !$selectedWaypoint}
-        />
-        <div class="flex flex-row gap-2">
-            <div class="grow flex flex-col gap-2">
+                            {i18n._(`gpx.symbol.${symbolKey}`)}
+                        {:else}
+                            {sym}
+                        {/if}
+                    </span>
+                </Select.Trigger>
+                <Select.Content class="max-h-60">
+                    {#each sortedSymbols as [key, symbol]}
+                        <Select.Item value={symbol.value}>
+                            <span>
+                                {#if symbol.icon}
+                                    {@const Component = symbol.icon}
+                                    <Component size="14" class="inline-block align-sub" />
+                                {:else}
+                                    <span class="w-4 inline-block"></span>
+                                {/if}
+                                {i18n._(`gpx.symbol.${key}`)}
+                            </span>
+                        </Select.Item>
+                    {/each}
+                </Select.Content>
+            </Select.Root>
+        </div>
+        <div class="flex flex-col gap-1">
+            <Label for="link">{i18n._('toolbar.waypoint.link')}</Label>
+            <Input
+                bind:value={link}
+                id="link"
+                class="h-8"
+                disabled={!canCreate && !$selectedWaypoint}
+            />
+        </div>
+        <div class="flex flex-row gap-1.5">
+            <div class="grow flex flex-col gap-1">
                 <Label for="latitude">{i18n._('toolbar.waypoint.latitude')}</Label>
                 <Input
                     bind:value={latitude}
@@ -233,7 +240,7 @@
                     disabled={!canCreate && !$selectedWaypoint}
                 />
             </div>
-            <div class="grow flex flex-col gap-2">
+            <div class="grow flex flex-col gap-1">
                 <Label for="longitude">{i18n._('toolbar.waypoint.longitude')}</Label>
                 <Input
                     bind:value={longitude}
@@ -248,11 +255,11 @@
             </div>
         </div>
     </fieldset>
-    <div class="flex flex-row gap-2 items-center">
+    <div class="flex flex-row gap-1.5 items-center">
         <Button
             variant="outline"
             disabled={!canCreate && !$selectedWaypoint}
-            class="grow whitespace-normal h-fit"
+            class="grow shrink h-fit min-h-8 whitespace-normal py-1"
             onclick={createOrUpdateWaypoint}
         >
             {#if $selectedWaypoint}

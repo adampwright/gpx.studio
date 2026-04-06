@@ -185,8 +185,8 @@
 
 <div class="flex flex-col gap-3 w-full max-w-80 {props.class ?? ''}">
     <fieldset class="flex flex-col gap-2">
-        <div class="flex flex-row gap-2 justify-center">
-            <div class="flex flex-col gap-2 grow">
+        <div class="flex flex-row gap-1.5 justify-center">
+            <div class="flex flex-col gap-1 grow">
                 <Label for="speed" class="flex flex-row">
                     <Zap size="16" />
                     {#if $velocityUnits === 'speed'}
@@ -239,7 +239,7 @@
                     {/if}
                 </div>
             </div>
-            <div class="flex flex-col gap-2 grow">
+            <div class="flex flex-col gap-1 grow">
                 <Label for="duration" class="flex flex-row">
                     <Timer size="16" />
                     {i18n._('toolbar.time.total_time')}
@@ -253,57 +253,61 @@
                 />
             </div>
         </div>
-        <Label class="flex flex-row">
-            <CirclePlay size="16" />
-            {i18n._('toolbar.time.start')}
-        </Label>
-        <div class="flex flex-row gap-2">
-            <DatePicker
-                bind:value={startDate}
-                disabled={!canUpdate}
-                locale={i18n.lang}
-                placeholder={i18n._('toolbar.time.pick_date')}
-                class="w-fit grow"
-                onchange={() => {
-                    untrack(() => updateEnd());
-                }}
-            />
-            <Input
-                type="time"
-                step={1}
-                disabled={!canUpdate}
-                bind:value={startTime}
-                class="w-fit"
-                onchange={() => {
-                    untrack(() => updateEnd());
-                }}
-            />
+        <div class="flex flex-col gap-1">
+            <Label class="flex flex-row">
+                <CirclePlay size="16" />
+                {i18n._('toolbar.time.start')}
+            </Label>
+            <div class="flex flex-row gap-1.5">
+                <DatePicker
+                    bind:value={startDate}
+                    disabled={!canUpdate}
+                    locale={i18n.lang}
+                    placeholder={i18n._('toolbar.time.pick_date')}
+                    class="w-fit grow"
+                    onchange={() => {
+                        untrack(() => updateEnd());
+                    }}
+                />
+                <Input
+                    type="time"
+                    step={1}
+                    disabled={!canUpdate}
+                    bind:value={startTime}
+                    class="w-fit"
+                    onchange={() => {
+                        untrack(() => updateEnd());
+                    }}
+                />
+            </div>
         </div>
-        <Label class="flex flex-row">
-            <CircleStop size="16" />
-            {i18n._('toolbar.time.end')}
-        </Label>
-        <div class="flex flex-row gap-2">
-            <DatePicker
-                bind:value={endDate}
-                disabled={!canUpdate}
-                locale={i18n.lang}
-                placeholder={i18n._('toolbar.time.pick_date')}
-                class="w-fit grow"
-                onchange={() => {
-                    untrack(() => updateStart());
-                }}
-            />
-            <Input
-                type="time"
-                step={1}
-                disabled={!canUpdate}
-                bind:value={endTime}
-                class="w-fit"
-                onchange={() => {
-                    untrack(() => updateStart());
-                }}
-            />
+        <div class="flex flex-col gap-1">
+            <Label class="flex flex-row">
+                <CircleStop size="16" />
+                {i18n._('toolbar.time.end')}
+            </Label>
+            <div class="flex flex-row gap-1.5">
+                <DatePicker
+                    bind:value={endDate}
+                    disabled={!canUpdate}
+                    locale={i18n.lang}
+                    placeholder={i18n._('toolbar.time.pick_date')}
+                    class="w-fit grow"
+                    onchange={() => {
+                        untrack(() => updateStart());
+                    }}
+                />
+                <Input
+                    type="time"
+                    step={1}
+                    disabled={!canUpdate}
+                    bind:value={endTime}
+                    class="w-fit"
+                    onchange={() => {
+                        untrack(() => updateStart());
+                    }}
+                />
+            </div>
         </div>
         {#if $gpxStatistics.global.time.moving === 0 || $gpxStatistics.global.time.moving === undefined}
             <div class="mt-0.5 flex flex-row gap-1 items-center">
@@ -314,11 +318,11 @@
             </div>
         {/if}
     </fieldset>
-    <div class="flex flex-row gap-2 items-center">
+    <div class="flex flex-row gap-1.5 items-center">
         <Button
             variant="outline"
             disabled={!canUpdate}
-            class="grow whitespace-normal h-fit"
+            class="grow shrink whitespace-normal h-fit min-h-8 py-1"
             onclick={() => {
                 let effectiveSpeed = getSpeed();
                 if (

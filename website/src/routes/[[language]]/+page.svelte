@@ -213,12 +213,12 @@
             </h3>
             <p class="md:max-w-3/4">{i18n._('homepage.community_description')}</p>
             <HeartHandshake size="80" class="mt-6 self-center" />
-            <div class="flex flex-row flex-wrap gap-4 justify-center mt-6">
+            <div class="flex flex-row flex-wrap gap-x-4 gap-y-1.5 justify-center mt-6">
                 <Button
                     variant="outline"
                     href="https://opencollective.com/gpxstudio"
                     target="_blank"
-                    class="text-support text-base max-w-full h-auto whitespace-normal"
+                    class="text-support py-1.5 text-base max-w-full h-auto whitespace-normal"
                 >
                     <span>{i18n._('homepage.support_button')}</span>
                     <Heart size="16" fill="var(--support)" color="var(--support)" />
@@ -227,7 +227,7 @@
                     variant="outline"
                     href="https://crowdin.com/project/gpxstudio"
                     target="_blank"
-                    class="text-base max-w-full h-auto whitespace-normal"
+                    class="text-base py-1.5 max-w-full h-auto whitespace-normal"
                 >
                     <Languages size="16" />
                     <span>{i18n._('homepage.translate_button')}</span>

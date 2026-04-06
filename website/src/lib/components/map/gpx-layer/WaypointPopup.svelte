@@ -88,7 +88,6 @@
             <CopyCoordinates coordinates={waypoint.item.attributes} />
             {#if $currentTool === Tool.WAYPOINT && selected}
                 <Button
-                    class="p-1 has-[>svg]:px-2 h-8"
                     variant="outline"
                     onclick={() => {
                         if (waypoint.fileId) {
