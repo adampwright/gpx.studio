@@ -318,7 +318,7 @@
         <Button
             variant="outline"
             disabled={!canUpdate}
-            class="grow whitespace-normal h-fit"
+            class="grow shrink whitespace-normal h-fit"
             onclick={() => {
                 let effectiveSpeed = getSpeed();
                 if (
