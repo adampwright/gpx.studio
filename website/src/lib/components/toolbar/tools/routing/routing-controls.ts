@@ -1073,7 +1073,9 @@ export class RoutingControls {
         if (!this.temporaryAnchor) {
             return;
         }
-        let source = get(map)?.getSource('routing-controls-0') as GeoJSONSource | undefined;
+        let source = get(map)?.getSource(`routing-controls-${this.fileId}-0`) as
+            | GeoJSONSource
+            | undefined;
         if (source) {
             if (this.temporaryAnchor) {
                 source.updateData({
@@ -1088,7 +1090,9 @@ export class RoutingControls {
             return;
         }
         const map_ = get(map);
-        let source = map_?.getSource('routing-controls-0') as GeoJSONSource | undefined;
+        let source = map_?.getSource(`routing-controls-${this.fileId}-0`) as
+            | GeoJSONSource
+            | undefined;
         if (source) {
             if (this.temporaryAnchor) {
                 source.updateData({
