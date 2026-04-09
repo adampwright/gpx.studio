@@ -35,6 +35,28 @@ export const basemaps: { [key: string]: string | StyleSpecification } = {
     maptilerTopo: `https://api.maptiler.com/maps/topo-v4/style.json?key=${maptilerKeyPlaceHolder}`,
     maptilerOutdoors: `https://api.maptiler.com/maps/outdoor-v4/style.json?key=${maptilerKeyPlaceHolder}`,
     maptilerSatellite: `https://api.maptiler.com/maps/hybrid-v4/style.json?key=${maptilerKeyPlaceHolder}`,
+    esriSatellite: {
+        version: 8,
+        sources: {
+            esriSatellite: {
+                type: 'raster',
+                tiles: [
+                    'https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/WMTS/tile/1.0.0/World_Imagery/default/default028mm/{z}/{y}/{x}.jpg',
+                ],
+                tileSize: 256,
+                maxzoom: 23,
+                attribution:
+                    '© <a href="https://www.esri.com/" target="_blank">Esri</a>, Vantor, Earthstar Geographics, and the GIS User Community',
+            },
+        },
+        layers: [
+            {
+                id: 'esriSatellite',
+                type: 'raster',
+                source: 'esriSatellite',
+            },
+        ],
+    },
     openStreetMap: {
         version: 8,
         sources: {
@@ -781,6 +803,7 @@ export const basemapTree: LayerTreeType = {
             maptilerTopo: true,
             maptilerOutdoors: true,
             maptilerSatellite: true,
+            esriSatellite: true,
             openStreetMap: true,
             openTopoMap: true,
             openHikingMap: true,
@@ -1006,6 +1029,7 @@ export const defaultBasemapTree: LayerTreeType = {
             maptilerTopo: true,
             maptilerOutdoors: true,
             maptilerSatellite: true,
+            esriSatellite: false,
             openStreetMap: true,
             openTopoMap: true,
             openHikingMap: true,
