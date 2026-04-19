@@ -81,8 +81,13 @@ export class StyleManager {
 
         let basemap = get(currentBasemap);
         const basemapInfo = basemaps[basemap] ?? custom[basemap]?.value ?? basemaps[defaultBasemap];
-        const basemapStyle = await this.get(basemapInfo);
 
+        let basemapStyle = basemaps.openStreetMap as maplibregl.StyleSpecification;
+        try {
+            basemapStyle = await this.get(basemapInfo);
+        } catch (e) {
+            console.error(e.message);
+        }
         this.merge(style, basemapStyle);
 
         if (this._maptilerKey !== '') {
@@ -109,45 +114,52 @@ export class StyleManager {
                 if (!layers[overlay]) {
                     if (this._pastOverlays.has(overlay)) {
                         const overlayInfo = custom[overlay]?.value ?? overlays[overlay];
-                        const overlayStyle = await this.get(overlayInfo);
-                        for (let layer of overlayStyle.layers ?? []) {
-                            if (map_.getLayer(layer.id)) {
-                                map_.removeLayer(layer.id);
+                        try {
+                            const overlayStyle = await this.get(overlayInfo);
+                            for (let layer of overlayStyle.layers ?? []) {
+                                if (map_.getLayer(layer.id)) {
+                                    map_.removeLayer(layer.id);
+                                }
                             }
+                        } catch (e) {
+                            // Should not happen
                         }
                         this._pastOverlays.delete(overlay);
                     }
                 } else {
                     const overlayInfo = custom[overlay]?.value ?? overlays[overlay];
-                    const overlayStyle = await this.get(overlayInfo);
-                    const opacity = overlayOpacities[overlay];
+                    try {
+                        const overlayStyle = await this.get(overlayInfo);
+                        const opacity = overlayOpacities[overlay];
 
-                    for (let sourceId in overlayStyle.sources) {
-                        if (!map_.getSource(sourceId)) {
-                            map_.addSource(sourceId, overlayStyle.sources[sourceId]);
-                        }
-                    }
-
-                    for (let layer of overlayStyle.layers ?? []) {
-                        if (!map_.getLayer(layer.id)) {
-                            if (opacity !== undefined) {
-                                if (layer.type === 'raster') {
-                                    if (!layer.paint) {
-                                        layer.paint = {};
-                                    }
-                                    layer.paint['raster-opacity'] = opacity;
-                                } else if (layer.type === 'hillshade') {
-                                    if (!layer.paint) {
-                                        layer.paint = {};
-                                    }
-                                    layer.paint['hillshade-exaggeration'] = opacity / 2;
-                                }
+                        for (let sourceId in overlayStyle.sources) {
+                            if (!map_.getSource(sourceId)) {
+                                map_.addSource(sourceId, overlayStyle.sources[sourceId]);
                             }
-                            map_.addLayer(layer, ANCHOR_LAYER_KEY.overlays);
                         }
-                    }
 
-                    this._pastOverlays.add(overlay);
+                        for (let layer of overlayStyle.layers ?? []) {
+                            if (!map_.getLayer(layer.id)) {
+                                if (opacity !== undefined) {
+                                    if (layer.type === 'raster') {
+                                        if (!layer.paint) {
+                                            layer.paint = {};
+                                        }
+                                        layer.paint['raster-opacity'] = opacity;
+                                    } else if (layer.type === 'hillshade') {
+                                        if (!layer.paint) {
+                                            layer.paint = {};
+                                        }
+                                        layer.paint['hillshade-exaggeration'] = opacity / 2;
+                                    }
+                                }
+                                map_.addLayer(layer, ANCHOR_LAYER_KEY.overlays);
+                            }
+                        }
+                        this._pastOverlays.add(overlay);
+                    } catch (e) {
+                        console.error(e.message);
+                    }
                 }
             }
         } catch (e) {}
@@ -181,6 +193,9 @@ export class StyleManager {
                 styleUrl = styleUrl.replace(maptilerKeyPlaceHolder, this._maptilerKey);
             }
             const response = await fetch(styleUrl, { cache: 'force-cache' });
+            if (!response.ok) {
+                throw new Error(`HTTP error fetching style "${styleInfo}": ${response.status}`);
+            }
             const style = await response.json();
             return style;
         } else {
