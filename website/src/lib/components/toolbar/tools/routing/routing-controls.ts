@@ -612,10 +612,8 @@ export class RoutingControls {
     addIntermediateAnchor(e: maplibregl.MapMouseEvent) {
         e.preventDefault();
 
-        console.log('add intermediate anchor');
-
         if (this.temporaryAnchor !== null) {
-            // this.turnIntoPermanentAnchor();
+            this.turnIntoPermanentAnchor();
             return;
         }
     }
@@ -898,7 +896,6 @@ export class RoutingControls {
 
         this.draggedAnchorIndex = e.features![0].properties.anchorIndex;
         this.draggingStartingPosition = e.point;
-        this.lastDraggedAnchorEventTime = Date.now();
 
         _map.on('mousemove', this.onMouseMoveBinded);
         _map.once('mouseup', this.onMouseUpBinded);
@@ -915,7 +912,6 @@ export class RoutingControls {
 
         this.draggedAnchorIndex = e.features![0].properties.anchorIndex;
         this.draggingStartingPosition = e.point;
-        this.lastDraggedAnchorEventTime = Date.now();
 
         e.preventDefault();
         _map.dragPan.disable();
