@@ -110,6 +110,10 @@ export function getElevation(
     let bbox = new maplibregl.LngLatBounds();
     coordinates.forEach((coord) => bbox.extend(coord));
 
+    if (!PUBLIC_MAPTILER_KEY) {
+        return Promise.resolve(coordinates.map(() => 0));
+    }
+
     let tiles = coordinates.map((coord) => pointToTile(coord.lon, coord.lat, ELEVATION_ZOOM));
     let uniqueTiles = Array.from(new Set(tiles.map((tile) => tile.join(',')))).map((tile) =>
         tile.split(',').map((x) => parseInt(x))

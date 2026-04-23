@@ -100,14 +100,30 @@ export class MapillaryLayer {
         this.popupOpen = popupOpen;
     }
 
+    private hasLayer(layerId: string) {
+        try {
+            return !!this.map.getLayer(layerId);
+        } catch {
+            return false;
+        }
+    }
+
+    private hasSource(sourceId: string) {
+        try {
+            return !!this.map.getSource(sourceId);
+        } catch {
+            return false;
+        }
+    }
+
     add() {
-        if (!this.map.getSource('mapillary')) {
+        if (!this.hasSource('mapillary')) {
             this.map.addSource('mapillary', mapillarySource);
         }
-        if (!this.map.getLayer('mapillary-sequence')) {
+        if (!this.hasLayer('mapillary-sequence')) {
             this.map.addLayer(mapillarySequenceLayer, ANCHOR_LAYER_KEY.mapillary);
         }
-        if (!this.map.getLayer('mapillary-image')) {
+        if (!this.hasLayer('mapillary-image')) {
             this.map.addLayer(mapillaryImageLayer, ANCHOR_LAYER_KEY.mapillary);
         }
         this.map.on('style.load', this.addBinded);
@@ -120,13 +136,13 @@ export class MapillaryLayer {
         this.layerEventManager.off('mouseenter', 'mapillary-image', this.onMouseEnterBinded);
         this.layerEventManager.off('mouseleave', 'mapillary-image', this.onMouseLeaveBinded);
 
-        if (this.map.getLayer('mapillary-image')) {
+        if (this.hasLayer('mapillary-image')) {
             this.map.removeLayer('mapillary-image');
         }
-        if (this.map.getLayer('mapillary-sequence')) {
+        if (this.hasLayer('mapillary-sequence')) {
             this.map.removeLayer('mapillary-sequence');
         }
-        if (this.map.getSource('mapillary')) {
+        if (this.hasSource('mapillary')) {
             this.map.removeSource('mapillary');
         }
 

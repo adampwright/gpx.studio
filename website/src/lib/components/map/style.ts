@@ -80,7 +80,13 @@ export class StyleManager {
         };
 
         let basemap = get(currentBasemap);
-        const basemapInfo = basemaps[basemap] ?? custom[basemap]?.value ?? basemaps[defaultBasemap];
+        let basemapInfo = basemaps[basemap] ?? custom[basemap]?.value ?? basemaps[defaultBasemap];
+
+        if (!this._maptilerKey) {
+            if (typeof basemapInfo === 'string' && basemapInfo.includes(maptilerKeyPlaceHolder)) {
+                basemapInfo = basemaps.openStreetMap;
+            }
+        }
 
         let basemapStyle = basemaps.openStreetMap as maplibregl.StyleSpecification;
         try {

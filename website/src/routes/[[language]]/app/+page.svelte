@@ -13,16 +13,15 @@
     import { Toaster } from '$lib/components/ui/sonner';
     import { i18n } from '$lib/i18n.svelte';
     import { settings } from '$lib/logic/settings';
-    import { loadFiles } from '$lib/logic/file-actions';
+    import RouteLibrary from '$lib/components/RouteLibrary.svelte';
+    import RouteStats from '$lib/components/RouteStats.svelte';
+    import { selection } from '$lib/logic/selection';
     import { onDestroy, onMount } from 'svelte';
-    import { page } from '$app/state';
     import { gpxStatistics, hoveredPoint, slicedGPXStatistics } from '$lib/logic/statistics';
-    import { getURLForGoogleDriveFile } from '$lib/components/embedding/embedding';
     import { db } from '$lib/db';
     import { fileStateCollection } from '$lib/logic/file-state';
 
     const {
-        treeFileView,
         elevationProfile,
         bottomPanelSize,
         rightPanelSize,
@@ -35,28 +34,9 @@
         bottomPanelWidth && bottomPanelWidth >= 540 && $elevationProfile ? 'horizontal' : 'vertical'
     );
 
-    onMount(async () => {
+    onMount(() => {
         settings.connectToDatabase(db);
-        fileStateCollection.connectToDatabase(db).then(() => {
-            let files: string[] = JSON.parse(page.url.searchParams.get('files') || '[]');
-            let ids: string[] = JSON.parse(page.url.searchParams.get('ids') || '[]');
-            let urls: string[] = files.concat(ids.map(getURLForGoogleDriveFile));
-
-            if (urls.length > 0) {
-                let downloads: Promise<File | null>[] = [];
-                urls.forEach((url) => {
-                    downloads.push(
-                        fetch(url)
-                            .then((response) => response.blob())
-                            .then((blob) => new File([blob], url.split('/').pop() ?? ''))
-                    );
-                });
-
-                Promise.all(downloads).then((files) => {
-                    loadFiles(files.filter((file) => file !== null));
-                });
-            }
-        });
+        fileStateCollection.connectToDatabase(db);
     });
 
     onDestroy(() => {
@@ -111,17 +91,12 @@
             >
                 <Toolbar />
             </div>
-            <Map class="h-full {$treeFileView ? '' : 'horizontal'}" />
+            <Map class="h-full" />
             <StreetViewControl />
             <LayerControl />
             <GPXLayers />
             <CoordinatesPopup />
             <Toaster richColors />
-            {#if !$treeFileView}
-                <div class="h-10 -translate-y-10 w-full pointer-events-none absolute z-30">
-                    <FileList orientation="horizontal" />
-                </div>
-            {/if}
         </div>
         {#if $elevationProfile}
             <Resizer
@@ -154,10 +129,10 @@
             {/if}
         </div>
     </div>
-    {#if $treeFileView}
-        <Resizer orientation="col" bind:after={$rightPanelSize} minAfter={100} maxAfter={400} />
-        <FileList orientation="vertical" recursive={true} style="width: {$rightPanelSize}px" />
-    {/if}
+    <Resizer orientation="col" bind:after={$rightPanelSize} minAfter={100} maxAfter={400} />
+    <div style="width: {$rightPanelSize}px" class="overflow-hidden">
+        <RouteLibrary />
+    </div>
 </div>
 
 <style lang="postcss">
